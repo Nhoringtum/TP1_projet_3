@@ -29,15 +29,15 @@ void HandleInput(bool* running, Gun* gun)
 
 int main()
 {
-    Gun gun;
+    Gun* gun = new Gun();
     bool running = true;
 
     float dt = 0.16f;
 
     while (running)
     {
-        HandleInput(&running, &gun);
-        gun.Update(dt);
+        HandleInput(&running, gun);
+        gun->Update(dt);
 
         Sleep(dt * 1000);
     }

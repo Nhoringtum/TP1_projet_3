@@ -29,9 +29,9 @@ public:
 	int mAmmo;
 	int mCapacity;
 	std::vector<State*> mStateTab;
+	eState mState = eState::Idle;
 
 private:
-	eState mState = eState::Idle;
 
 	int mTransitions[STATE_COUNT][STATE_COUNT] =
 	{

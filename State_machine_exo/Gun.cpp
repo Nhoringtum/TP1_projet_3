@@ -7,6 +7,8 @@ Gun::Gun() : mCapacity(10), mAmmo(10), mStateTab(0)
 	ReloadingState* reload = new ReloadingState();
 	ShootingState* shooting = new ShootingState();
 	EmptyState* empty = new EmptyState();
+
+	mState = Idle;
 	
 	mStateTab.push_back(idle);
 	mStateTab.push_back(reload);

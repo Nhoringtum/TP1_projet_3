@@ -12,7 +12,7 @@ public:
 	virtual void Start() = 0;
 	virtual void Update(float deltaTime) = 0;
 
-	Gun gun;
+	Gun* gun;
 };
 
 #endif

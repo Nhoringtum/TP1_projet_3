@@ -5,10 +5,10 @@ ReloadingState::~ReloadingState(){}
 
 void ReloadingState::Start()
 {
-	if (gun.SetState(gun.eState::Reloading))
+	if (gun->SetState(gun->eState::Reloading))
 	{
 		std::cout << "Reloading..." << std::endl;
-		gun.mAmmo = gun.mCapacity;
+		gun->mAmmo = gun->mCapacity;
 	}
 }
 void ReloadingState::Update(float deltaTime)
@@ -16,7 +16,7 @@ void ReloadingState::Update(float deltaTime)
 	mReloadProgress += deltaTime;
 	if (mReloadProgress >= mReloadTime)
 	{
-		gun.SetState(gun.eState::Idle);
+		gun->SetState(gun->eState::Idle);
 		mReloadProgress = 0.f;
 	}
 }
