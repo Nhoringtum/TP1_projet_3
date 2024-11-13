@@ -1,15 +1,20 @@
 #ifndef __RELOADINGSTATE__H__
 #define __RELOADINGSTATE__H__
 
-#include "State.h"
+#include "pch.h"
 
-class ReloadingState : State
+class ReloadingState : public State
 {
+public:
 	ReloadingState();
 	~ReloadingState();
 
 	void Start();
-	void Update();
+	void Update(float deltaTime);
+
+private:
+	float mReloadProgress;
+	float mReloadTime;
 };
 
 #endif

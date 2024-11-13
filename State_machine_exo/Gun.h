@@ -1,6 +1,9 @@
 #ifndef __GUN_H__
 #define __GUN_H__
+
 #include <vector>
+
+class State;
 
 class Gun
 {
@@ -8,7 +11,7 @@ public:
 	Gun();
 	~Gun();
 
-	enum State
+	enum eState
 	{
 		Idle,
 		Shooting,
@@ -18,15 +21,17 @@ public:
 		StateCount
 	};
 
-	static const int STATE_COUNT = (int)State::StateCount;
+	static const int STATE_COUNT = (int)eState::StateCount;
 
 	void Update(float dt);
-	void Shoot();
-	void Reload();
-	bool SetState(State to);
+	bool SetState(eState to);
+
+	int mAmmo;
+	int mCapacity;
+	std::vector<State*> mStateTab;
 
 private:
-	State mState = State::Idle;
+	eState mState = eState::Idle;
 
 	int mTransitions[STATE_COUNT][STATE_COUNT] =
 	{
@@ -38,13 +43,7 @@ private:
 											//1rst
 	};
 
-	int mAmmo;
-	int mCapacity;
-	float mReloadTime;
-	float mShootTime;
-	float mReloadProgress;
-	float mShootProgress;
-	std::vector<State*> mStateTab;
+	
 };
 
 #endif

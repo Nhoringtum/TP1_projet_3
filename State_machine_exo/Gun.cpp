@@ -1,9 +1,18 @@
-#include "Gun.h"
-#include <iostream>
+#include "pch.h"
 
-Gun::Gun()
-	: mCapacity(10), mAmmo(10), mReloadTime(1.f), mShootTime(5.f), 
-	mReloadProgress(0.f), mShootProgress(0.f){}
+
+Gun::Gun() : mCapacity(10), mAmmo(10), mStateTab(0)
+{
+	IdleState* idle = new IdleState();
+	ReloadingState* reload = new ReloadingState();
+	ShootingState* shooting = new ShootingState();
+	EmptyState* empty = new EmptyState();
+	
+	mStateTab.push_back(idle);
+	mStateTab.push_back(reload);
+	mStateTab.push_back(shooting);
+	mStateTab.push_back(empty);
+}
 
 Gun::~Gun(){}
 
@@ -12,51 +21,23 @@ void Gun::Update(float dt)
 	switch (mState)
 	{
 	case Gun::Idle:
+		mStateTab[0]->Update(dt);
 		break;
 	case Gun::Shooting:
-		mShootProgress += dt;
-		//std::cout << mShootProgress << std::endl;
-		if (mShootProgress >= mShootTime)
-		{
-			if (mAmmo <= 0)
-				SetState(State::Empty);
-			else
-				SetState(State::Idle);
-		}
+		mStateTab[2]->Update(dt);
 		break;
 	case Gun::Empty:
+		mStateTab[3]->Update(dt);
 		break;
 	case Gun::Reloading:
-		mReloadProgress += dt;
-		if (mReloadProgress >= mReloadTime)
-			SetState(State::Idle);
+		mStateTab[1]->Update(dt);
 		break;
 	default:
 		break;
 	}
 }
 
-void Gun::Shoot()
-{
-	if (SetState(State::Shooting))
-	{
-		mShootProgress = 0.f;
-		mAmmo--;
-		std::cout << "Bang! Ammo left: " << mAmmo << std::endl;
-	}
-}
-
-void Gun::Reload()
-{
-	if (SetState(State::Reloading))
-	{
-		std::cout << "Reloading..." << std::endl;
-		mReloadProgress = 0.f;
-		mAmmo = mCapacity;
-	}
-}
-
-bool Gun::SetState(State newState)
+bool Gun::SetState(eState newState)
 {
 	if (mTransitions[mState][newState] == 0)
 		return (false);

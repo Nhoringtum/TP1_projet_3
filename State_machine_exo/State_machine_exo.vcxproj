@@ -138,6 +138,7 @@
     <ClInclude Include="EmptyState.h" />
     <ClInclude Include="Gun.h" />
     <ClInclude Include="IdleState.h" />
+    <ClInclude Include="pch.h" />
     <ClInclude Include="ReloadingState.h" />
     <ClInclude Include="ShootingState.h" />
     <ClInclude Include="State.h" />

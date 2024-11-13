@@ -1,9 +1,8 @@
 #include <conio.h>
 #include <Windows.h>
 #include <iostream>
-#include "Gun.h"
 
-
+#include "pch.h"
 
 void HandleInput(bool* running, Gun* gun)
 {
@@ -17,10 +16,10 @@ void HandleInput(bool* running, Gun* gun)
             *running = false;
             break;
         case 'r':
-            gun->Reload();
+            gun->mStateTab[1]->Start();
             break;
         case 'a':
-            gun->Shoot();
+            gun->mStateTab[2]->Start();
             break;
         default:
             break;

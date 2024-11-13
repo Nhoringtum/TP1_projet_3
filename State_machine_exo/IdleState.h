@@ -1,10 +1,11 @@
 #ifndef __IDLESTATE_H__
 #define __IDLESTATE_H__
 
-#include "State.h"
+#include "pch.h"
 
-class IdleState : State
+class IdleState : public State
 {
+public:
 	IdleState();
 	~IdleState();
 

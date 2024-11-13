@@ -1,6 +1,8 @@
 #ifndef __STATE_H__
 #define __STATE_H__
 
+#include "Gun.h"
+
 class State
 {
 public:
@@ -9,6 +11,8 @@ public:
 
 	virtual void Start() = 0;
 	virtual void Update(float deltaTime) = 0;
+
+	Gun gun;
 };
 
 #endif
